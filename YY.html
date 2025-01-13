@@ -1,39 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLV Live Stream Player</title>
-    <style>
-        #video-container {
-            width: 640px;
-            height: 360px;
-            position: relative;
-        }
-    </style>
+    <title>FLV直播播放器</title>
+    <script src="https://cdn.jsdelivr.net/npm/flv.js@1.5.0/dist/flv.min.js"></script>
 </head>
 <body>
-    <div id="video-container"></div>
-    <!-- 引入播放器库（假设使用flv.js） -->
-    <script src="https://cdn.jsdelivr.net/npm/flv.js@1.5.0/dist/flv.min.js"></script>
+    <video id="videoElement" controls width="600"></video>
+
     <script>
-        // 初始化FLV播放器
         if (flvjs.isSupported()) {
-            var videoElement = document.createElement('video');
+            var videoElement = document.getElementById('videoElement');
             var flvPlayer = flvjs.createPlayer({
                 type: 'flv',
-                isLive: true,
-                url: 'https://cn-jxnc-cm-01-01.bilivideo.com/live-bvc/776269/live_3546638782040606_52478276.flv?expires=1736769588&pt=web&deadline=1736769588&len=0&oi=1864662949&platform=web&qn=10000&trid=100038e46707092fe57e5389690c586784f2&uipk=100&uipv=100&nbs=1&uparams=cdn,deadline,len,oi,platform,qn,trid,uipk,uipv,nbs&cdn=cn-gotcha01&upsig=ec35cebaed6433f6ab8a67a6cc02667b&site=63a43c450b25d0ee02446e89717642b9&free_type=0&mid=0&sche=ban&sid=cn-jxnc-cm-01-01&chash=0&bmt=1&sg=lr&trace=73&isp=cm&rg=East&pv=Shandong&score=1&suffix=origin&sk=1a9d9b2a8b315ae9ee96f93ef7600414&pp=srt&info_source=origin&deploy_env=prod&hot_cdn=0&sl=1&p2p_type=1&origin_bitrate=1289933&source=puv3_onetier&vd=nc&zoneid_l=151339011&sid_l=stream_name_cold&src=puv3&order=3' // 替换为你的FLV直播流地址
+                url: 'https://c1e08a48377edb02e940d5b6868c5ef5.v.smtcdns.net/d1--cn-gotcha04.bilivideo.com/live-bvc/452482/live_3546638782040606_52478276.flv?expires=1736772675&len=0&oi=1864662949&pt=web&qn=10000&trid=1000388b5a546aa399c95b519992796784fe&sigparams=cdn,expires,len,oi,pt,qn,trid&cdn=cn-gotcha04&sign=26c8ffa5078f04ed4669841f9dd42e9d&site=7e0386203cd4dd7569d1f8ac71c8841c&free_type=0&mid=0&sche=ban&trace=64&isp=cm&rg=East&pv=Shandong&pp=srt&suffix=origin&sl=1&p2p_type=1&sk=1a9d9b2a8b315ae9ee96f93ef7600414&info_source=origin&origin_bitrate=1289653&source=puv3_onetier&deploy_env=prod&hot_cdn=0&score=1&vd=bc&src=puv3&order=2&TxLiveCode=cold_stream&TxDispType=3&svr_type=live_oc&tencent_test_client_ip=111.36.127.165&dispatch_from=OC_MGR183.204.34.97&utime=1736769507526'
             });
             flvPlayer.attachMediaElement(videoElement);
             flvPlayer.load();
             flvPlayer.play();
-
-            document.getElementById('video-container').appendChild(videoElement);
-        } else if (flvjs.isBrowserSupported()) {
-            console.warn('Your browser may not support FLV.js');
         } else {
-            console.error('FLV.js is not supported in this browser');
+            alert('此浏览器不支持FLV播放');
         }
     </script>
 </body>
