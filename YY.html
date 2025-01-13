@@ -1,12 +1,40 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>直播间</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLV Live Stream Player</title>
+    <style>
+        #video-container {
+            width: 640px;
+            height: 360px;
+            position: relative;
+        }
+    </style>
 </head>
 <body>
-<div id="yy直播嵌入代码" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-    <iframe src="https://www.yy.com/993" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen></iframe>
-</div>
+    <div id="video-container"></div>
+    <!-- 引入播放器库（假设使用flv.js） -->
+    <script src="https://cdn.jsdelivr.net/npm/flv.js@1.5.0/dist/flv.min.js"></script>
+    <script>
+        // 初始化FLV播放器
+        if (flvjs.isSupported()) {
+            var videoElement = document.createElement('video');
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                isLive: true,
+                url: 'https://cn-jxnc-cm-01-01.bilivideo.com/live-bvc/776269/live_3546638782040606_52478276.flv?expires=1736769588&pt=web&deadline=1736769588&len=0&oi=1864662949&platform=web&qn=10000&trid=100038e46707092fe57e5389690c586784f2&uipk=100&uipv=100&nbs=1&uparams=cdn,deadline,len,oi,platform,qn,trid,uipk,uipv,nbs&cdn=cn-gotcha01&upsig=ec35cebaed6433f6ab8a67a6cc02667b&site=63a43c450b25d0ee02446e89717642b9&free_type=0&mid=0&sche=ban&sid=cn-jxnc-cm-01-01&chash=0&bmt=1&sg=lr&trace=73&isp=cm&rg=East&pv=Shandong&score=1&suffix=origin&sk=1a9d9b2a8b315ae9ee96f93ef7600414&pp=srt&info_source=origin&deploy_env=prod&hot_cdn=0&sl=1&p2p_type=1&origin_bitrate=1289933&source=puv3_onetier&vd=nc&zoneid_l=151339011&sid_l=stream_name_cold&src=puv3&order=3' // 替换为你的FLV直播流地址
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.play();
+
+            document.getElementById('video-container').appendChild(videoElement);
+        } else if (flvjs.isBrowserSupported()) {
+            console.warn('Your browser may not support FLV.js');
+        } else {
+            console.error('FLV.js is not supported in this browser');
+        }
+    </script>
 </body>
 </html>
